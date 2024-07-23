@@ -5,6 +5,7 @@ using DataLayer;
 using DataLayer.Repositories;
 using DataLayer.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
+using ServiceLayer.Mapping;
 using ServiceLayer.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,8 +23,14 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
+// CUSTOM SERVISLER
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
+
+// Mapping
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 var app = builder.Build();
 

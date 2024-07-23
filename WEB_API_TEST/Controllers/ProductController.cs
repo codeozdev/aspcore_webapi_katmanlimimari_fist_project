@@ -1,5 +1,4 @@
-﻿using CoreLayer.Models;
-using CoreLayer.Service;
+﻿using CoreLayer.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB_API_TEST.Controllers
@@ -9,21 +8,22 @@ namespace WEB_API_TEST.Controllers
     public class ProductController : ControllerBase
     {
 
-        private readonly IService<Product> _service;
+
+        private readonly IProductService _productService;
 
 
 
-        public ProductController(IService<Product> service)
+        public ProductController(IProductService productService)
         {
 
-            _service = service;
+            _productService = productService;
         }
 
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var products = await _service.GetAllAsync();
+            var products = await _productService.GetAllAsync();
             return Ok(products);
         }
     }
